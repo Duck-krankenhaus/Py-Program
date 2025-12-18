@@ -1,0 +1,38 @@
+def sum_positive_elements(arr):
+    return sum(x for x in arr if x > 0)
+
+def product_between_extremes(arr):
+    max_abs_idx = min_abs_idx = 0
+    for i in range(len(arr)):
+        if abs(arr[i]) > abs(arr[max_abs_idx]):
+            max_abs_idx = i
+        if abs(arr[i]) < abs(arr[min_abs_idx]):
+            min_abs_idx = i
+    
+    start = min(max_abs_idx, min_abs_idx)
+    end = max(max_abs_idx, min_abs_idx)
+    
+    product = 1
+    for i in range(start + 1, end):
+        product *= arr[i]
+    return product
+
+def sort_descending(arr):
+    result = arr.copy()
+    for i in range(len(result)):
+        max_idx = i
+        for j in range(i + 1, len(result)):
+            if result[j] > result[max_idx]:
+                max_idx = j
+        result[i], result[max_idx] = result[max_idx], result[i]
+    return result
+
+n = int(input("Введіть кількість елементів масиву: "))
+arr = []
+print("Введіть елементи масиву:")
+for i in range(n):
+    arr.append(float(input(f"Елемент {i+1}: ")))
+
+print(f"\nСума додатних елементів: {sum_positive_elements(arr)}")
+print(f"Добуток між екстремумами: {product_between_extremes(arr)}")
+print(f"Відсортований масив: {sort_descending(arr)}")
